@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+table {
+  margin: 5px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #888;
+  padding: 0.25em 0.5em;
+}
+
+th {
+  background-color: rgb(212, 212, 212);
+  color: black;
+}
+
+@media only screen and (max-width: 640px) {
+  .user_dashboard {
+    padding: 10px 10px !important;
+  }
+}
