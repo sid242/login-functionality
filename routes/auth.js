@@ -104,7 +104,6 @@ router.post('/login', [
 })
 
 
-
 router.post('/getuser', fetchuser, async (req, res) => {
     // router.post('/getuser', async (req, res) => {
 
@@ -118,8 +117,6 @@ router.post('/getuser', fetchuser, async (req, res) => {
         res.status(500).send("Internal server error");
     }
 })
-
-
 
 
 router.post("/sendpasswordlink", async (req, res) => {
@@ -147,7 +144,7 @@ router.post("/sendpasswordlink", async (req, res) => {
                 from: process.env.EMAIL,
                 to: email,
                 subject: "Sending Email For password Reset",
-                text: `This Link Valid For 2 MINUTES http://localhost:3000/forgotpassword/${userfind.id}/${setusertoken.verifytoken}`
+                text: `This Link Valid For 2 MINUTES http://3.139.238.162:3000/forgotpassword/${userfind.id}/${setusertoken.verifytoken}`
             }
 
             transporter.sendMail(mailOptions, (error, info) => {

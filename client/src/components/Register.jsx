@@ -84,7 +84,7 @@ const Register = () => {
             const { name, email, password } = credentials
             let data = JSON.stringify({ name, email, password })
             try {
-                const response = await axios.post("http://localhost:3500/api/auth/createuser",
+                const response = await axios.post("http://3.139.238.162:3500/api/auth/createuser",
                     data,
                     {
                         headers: {
