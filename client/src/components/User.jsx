@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import Pagination from './Pagination';
 import styled from "styled-components"
 import UserTable from './UserTable';
+import '../App.css'
 
 const Container = styled.div`
 padding: 10px 70px;
 `
 const LogoutBtn = styled.button`
-margin: 0px 20px;
+/* margin: 0px 20px; */
   color: white;
   background-color: blue;
   padding: 5px 10px;
@@ -32,7 +33,7 @@ const TextHeading = styled.h2``
 const RightDiv = styled.div``
 
 const NameSpan = styled.span`
-margin-right:15px;
+/* margin-right:15px; */
 `
 const Info = styled.div`
 margin: 10px 6px;
@@ -68,6 +69,7 @@ const FilterButton = styled.button`
 
 const User = () => {
     const [userData, setUserData] = useState([]);
+    const [filterData, setFilterData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage] = useState(10);
     const [filterValue, setFilterValue] = useState("");
@@ -78,7 +80,7 @@ const User = () => {
 
     const indexOfLastUser = currentPage * usersPerPage;
     const indexOfFirstUser = indexOfLastUser - usersPerPage;
-    const currentUsers = userData.slice(indexOfFirstUser, indexOfLastUser);
+    const currentUsers = filterData.slice(indexOfFirstUser, indexOfLastUser);
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
 
@@ -87,6 +89,7 @@ const User = () => {
         try {
             const users = await axios.get('https://dummyjson.com/users');
             setUserData(users.data.users)
+            setFilterData(users.data.users)
         } catch (error) {
             console.log("loadUserData", error)
         }
@@ -106,10 +109,10 @@ const User = () => {
 
     const handleFilter = () => {
         if (filterValue.length > 0) {
-            var filderdata = userData.filter(items => {
+            var filtereddata = userData.filter(items => {
                 return items.firstName.toLowerCase().includes(filterValue.toLowerCase()) || items.lastName.toLowerCase().includes(filterValue.toLowerCase())
             })
-            setUserData(filderdata)
+            setFilterData(filtereddata)
             // console.log('filderdata', filderdata);
             setRandom(random + 1)
             setCurrentPage(1)
@@ -127,8 +130,8 @@ const User = () => {
                     <TextHeading>Users</TextHeading>
                 </LeftDiv>
                 <RightDiv className="right" >
-                    <NameSpan>{JSON.parse(localStorage.getItem("userInfo")).data.user.name}</NameSpan>|
-                    <LogoutBtn onClick={handleLogout}>Logout</LogoutBtn>
+                    <NameSpan className='username'>{JSON.parse(localStorage.getItem("userInfo")).data.user.name}</NameSpan>|
+                    <LogoutBtn className='logout' onClick={handleLogout}>Logout</LogoutBtn>
                 </RightDiv>
             </Header>
 
@@ -138,7 +141,7 @@ const User = () => {
             </FilterContainer>
 
             <Info>
-                <Span style={{ fontWeight: "bold" }}>{userData.length}, Users </Span>
+                <Span style={{ fontWeight: "bold" }}>{filterData.length}, Users </Span>
                 <Span>Show 10 Entries</Span>
             </Info>
             <UserTable userData={userData} currentUsers={currentUsers} indexOfFirstUser={indexOfFirstUser} setRandom={setRandom} random={random} setUserData={setUserData} />
@@ -146,7 +149,7 @@ const User = () => {
             <Pagination
                 style={{ marginLeft: "20px", display: "flex" }}
                 usersPerPage={usersPerPage}
-                totalUsers={userData.length}
+                totalUsers={filterData.length}
                 paginate={paginate}
                 currentPage={currentPage}
             />
