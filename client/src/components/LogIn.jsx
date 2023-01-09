@@ -78,7 +78,6 @@ margin-bottom: 15px;
 `
 
 const LogIn = () => {
-
     const [credentials, setCredentials] = useState({ email: "", password: "" })
     let navigate = useNavigate();
 
@@ -86,7 +85,7 @@ const LogIn = () => {
         e.preventDefault();
         try {
             let data = JSON.stringify({ email: credentials.email, password: credentials.password })
-            const response = await axios.post("http://3.139.238.162:3500/api/auth/login",
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`,
                 data, {
                 headers: {
                     'Content-Type': 'application/json'

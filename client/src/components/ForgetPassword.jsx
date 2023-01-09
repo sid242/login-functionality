@@ -114,7 +114,7 @@ const ForgetPassword = () => {
         console.log("reset")
         try {
             let data = JSON.stringify({ password });
-            const res = await axios.post(`http://3.139.238.162:3500/api/auth/${id}/${token}`,
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/${id}/${token}`,
                 data,
                 {
                     headers: {

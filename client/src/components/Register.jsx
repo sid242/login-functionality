@@ -84,7 +84,7 @@ const Register = () => {
             const { name, email, password } = credentials
             let data = JSON.stringify({ name, email, password })
             try {
-                const response = await axios.post("http://3.139.238.162:3500/api/auth/createuser",
+                const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/createuser`,
                     data,
                     {
                         headers: {
@@ -162,7 +162,7 @@ const Register = () => {
                             required
                         />
                     </InputContainer>
-                    <Button>Sing Up</Button>
+                    <Button>Sign Up</Button>
                 </Form>
                 <Span>Already have an account? <Link to='/login'>Login</Link></Span>
             </Wrapper>

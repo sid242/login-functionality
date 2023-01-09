@@ -91,7 +91,7 @@ const PasswordReset = () => {
         } else {
             try {
                 let data = JSON.stringify({ email });
-                const res = await axios.post("http://3.139.238.162:3500/api/auth/sendpasswordlink",
+                const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/sendpasswordlink`,
                     data, {
                     headers: {
                         "Content-Type": "application/json"
