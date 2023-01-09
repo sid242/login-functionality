@@ -93,7 +93,7 @@ const Register = () => {
                     });
                 const json = await response.data;
                 localStorage.setItem('userInfo', JSON.stringify(json))
-                console.log(json);
+                // console.log(json);
                 if (json.success) {
                     localStorage.setItem('token', json.authtoken);
                     navigate("/user");

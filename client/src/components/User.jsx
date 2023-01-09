@@ -87,9 +87,6 @@ const User = () => {
         try {
             const users = await axios.get('https://dummyjson.com/users');
             setUserData(users.data.users)
-            /* console.log("userData", users.data.users) */
-            const filteredU = await axios.get('https://dummyjson.com/users');
-            /* console.log("filteredU", filteredU.data) */
         } catch (error) {
             console.log("loadUserData", error)
         }
@@ -97,7 +94,7 @@ const User = () => {
 
     useEffect(() => {
         loadUserData();
-        console.log("userData", userData)
+        // console.log("userData", userData)
     }, [])
 
     const handleLogout = () => {
@@ -113,14 +110,14 @@ const User = () => {
                 return items.firstName.toLowerCase().includes(filterValue.toLowerCase()) || items.lastName.toLowerCase().includes(filterValue.toLowerCase())
             })
             setUserData(filderdata)
-            console.log('filderdata', filderdata);
+            // console.log('filderdata', filderdata);
             setRandom(random + 1)
+            setCurrentPage(1)
         }
         else {
-            console.log(filderdata, "filderdata");
+            // console.log(filderdata, "filderdata");
             loadUserData()
         }
-
     }
 
     return (

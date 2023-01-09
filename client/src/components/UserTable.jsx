@@ -34,7 +34,6 @@ const UserTable = ({ userData, currentUsers, setUserData, random, setRandom, ind
         }
     }
     function acendingDate() {
-        console.log("userData");
         if (!ascDate) {
             var dateInMili = userData.filter(items => {
                 let month = new Date(items.birthDate).getMonth() + 1

@@ -93,12 +93,12 @@ const LogIn = () => {
 
             });
             const json = await response.data;
-            console.log(json);
+            // console.log(json);
             localStorage.setItem('userInfo', JSON.stringify(json))
 
             if (json.success) {
                 localStorage.setItem('token', json.authtoken);
-                console.log("LoggedIn")
+                // console.log("LoggedIn")
                 navigate("/user");
             }
             else {
