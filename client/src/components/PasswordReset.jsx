@@ -77,7 +77,10 @@ const PasswordReset = () => {
 
     const [email, setEmail] = useState("");
 
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState(null);
+
+    const [loading, setLoading] = useState(null);
+
 
     const setVal = (e) => {
         setEmail(e.target.value)
@@ -90,6 +93,8 @@ const PasswordReset = () => {
             alert("Enter valid email!")
         } else {
             try {
+                setLoading(true)
+                setMessage(false)
                 let data = JSON.stringify({ email });
                 const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/sendpasswordlink`,
                     data, {
@@ -103,13 +108,16 @@ const PasswordReset = () => {
                 if (response.status == 201) {
                     setEmail("");
                     setMessage(true)
+                    setLoading(false)
                 } else {
                     alert("Invalid User")
                 }
 
             } catch (error) {
-                console.log("Error", error)
-                alert("Invalid User")
+                console.log("Error", error);
+                setLoading(false);
+                alert("Invalid User");
+
             }
         }
     }
@@ -134,7 +142,9 @@ const PasswordReset = () => {
 
                         <Button>Get Link</Button>
                     </Form>
-                    {message ? <Span style={{ color: "green", fontWeight: "bold" }}>Pasword reset link send Succsfully in Your Email</Span> : ""}
+                    {loading ? <Span style={{ color: "blue", fontWeight: "bold" }}>Loading...</Span> : <Span></Span>}
+                    {message ? <Span style={{ color: "green", fontWeight: "bold" }}>
+                        Pasword reset link send Succsfully in Your Email</Span> : ""}
                 </Wrapper>
             </Container>
 
