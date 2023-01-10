@@ -8,7 +8,7 @@ const nodemailer = require("nodemailer");
 var fetchuser = require("../middleware/fetchuser")
 
 const JWT_SECRET = process.env.JWT_SECRET;
-
+console.log(JWT_SECRET)
 // email config
 
 const transporter = nodemailer.createTransport({

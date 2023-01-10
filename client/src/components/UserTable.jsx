@@ -15,8 +15,17 @@ const TableBody = styled.tbody``
 const TableRow = styled.tr``
 const ColumnHeading = styled.th``
 const RowDetails = styled.td``
+const Loader = styled.div`
+    height: 300px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+`
 
-const UserTable = ({ userData, currentUsers, setUserData, random, setRandom, indexOfFirstUser }) => {
+const UserTable = ({ userData, currentUsers, setUserData, random, setRandom, indexOfFirstUser, loading }) => {
     const [asc, setasc] = useState(false);
     const [ascDate, setAscDate] = useState(false);
 
@@ -89,7 +98,7 @@ const UserTable = ({ userData, currentUsers, setUserData, random, setRandom, ind
                         }} onClick={() => acendingDate()}><img src="https://www.pngfind.com/pngs/b/495-4952598_sort-icon-png.png" width="16px" /></button></ColumnHeading>
                     </TableRow>
                 </TableHead>
-                <TableBody>
+                {loading ? <Loader>Loading...</Loader> : <TableBody>
                     {currentUsers.map((i, index) =>
                         <TableRow key={i.id}>
                             <RowDetails>{index + indexOfFirstUser + 1}</RowDetails>
@@ -109,7 +118,7 @@ const UserTable = ({ userData, currentUsers, setUserData, random, setRandom, ind
                             <RowDetails>{i.birthDate}</RowDetails>
                         </TableRow>
                     )}
-                </TableBody>
+                </TableBody>}
             </TableFormat>
         </TableContainer>
     )

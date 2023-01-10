@@ -73,6 +73,7 @@ const User = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage] = useState(10);
     const [filterValue, setFilterValue] = useState("");
+    const [loading, setLoading] = useState(true);
 
 
     const [random, setRandom] = useState(0)
@@ -90,6 +91,7 @@ const User = () => {
             const users = await axios.get('https://dummyjson.com/users');
             setUserData(users.data.users)
             setFilterData(users.data.users)
+            setLoading(false)
         } catch (error) {
             console.log("loadUserData", error)
         }
@@ -144,7 +146,7 @@ const User = () => {
                 <Span style={{ fontWeight: "bold" }}>{filterData.length}, Users </Span>
                 <Span>Show 10 Entries</Span>
             </Info>
-            <UserTable userData={userData} currentUsers={currentUsers} indexOfFirstUser={indexOfFirstUser} setRandom={setRandom} random={random} setUserData={setUserData} />
+            <UserTable userData={userData} currentUsers={currentUsers} indexOfFirstUser={indexOfFirstUser} setRandom={setRandom} random={random} setUserData={setUserData} loading={loading} />
 
             <Pagination
                 style={{ marginLeft: "20px", display: "flex" }}
