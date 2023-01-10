@@ -7,15 +7,15 @@ var jwt = require('jsonwebtoken');
 const nodemailer = require("nodemailer");
 var fetchuser = require("../middleware/fetchuser")
 
-const JWT_SECRET = 'Iamgoodboy';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // email config
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-        user: 'sidprajapati2402@gmail.com',
-        pass: 'dsykvicxvxtimyux'
+        user: process.env.USER_EMAIL,
+        pass: process.env.USER_PASSWORD
     }
 })
 
