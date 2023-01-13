@@ -96,11 +96,12 @@ const ForgetPassword = () => {
 
         const data = await res.data;
 
-        if (data.status == 201) {
+        if (data.status === 201) {
             console.log("user valid")
         } else {
-            navigate("/")
-            // alert("Generate Link again")
+            console.log("user not valid")
+            // navigate("/")
+            alert("Generate Link again")
         }
     }
 
@@ -124,7 +125,7 @@ const ForgetPassword = () => {
                 });
 
             const response = await res.data;
-            if (response.status == 201) {
+            if (response.status === 201) {
                 setPassword("")
                 setMessage(true)
             }
