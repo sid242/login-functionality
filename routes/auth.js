@@ -132,7 +132,7 @@ router.post("/sendpasswordlink", async (req, res) => {
 
         // token generate for reset password
         const token = jwt.sign({ _id: userfind._id }, JWT_SECRET, {
-            expiresIn: "120s"
+            expiresIn: "300s"
         });
 
         const setusertoken = await User.findByIdAndUpdate({ _id: userfind._id }, { verifytoken: token }, { new: true });
@@ -143,7 +143,7 @@ router.post("/sendpasswordlink", async (req, res) => {
                 from: process.env.EMAIL,
                 to: email,
                 subject: "Sending Email For password Reset",
-                text: `This Link Valid For 2 MINUTES http://3.139.238.162:3000/forgotpassword/${userfind.id}/${setusertoken.verifytoken}`
+                text: `This Link Valid For 5 MINUTES https://login-functionality-tlcc.vercel.app//forgotpassword/${userfind.id}/${setusertoken.verifytoken}`
             }
 
             transporter.sendMail(mailOptions, (error, info) => {
