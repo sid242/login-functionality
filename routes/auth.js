@@ -143,7 +143,7 @@ router.post("/sendpasswordlink", async (req, res) => {
                 from: process.env.EMAIL,
                 to: email,
                 subject: "Sending Email For password Reset",
-                text: `This Link Valid For 5 MINUTES https://login-functionality-tlcc.vercel.app//forgotpassword/${userfind.id}/${setusertoken.verifytoken}`
+                text: `This Link Valid For 5 MINUTES https://login-functionality-tlcc.vercel.app/forgotpassword/${userfind.id}/${setusertoken.verifytoken}`
             }
 
             transporter.sendMail(mailOptions, (error, info) => {
