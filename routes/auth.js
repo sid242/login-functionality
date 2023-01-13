@@ -143,6 +143,7 @@ router.post("/sendpasswordlink", async (req, res) => {
                 from: process.env.EMAIL,
                 to: email,
                 subject: "Sending Email For password Reset",
+                // text: `This Link Valid For 5 MINUTES http://localhost:3001/forgotpassword/${userfind.id}/${setusertoken.verifytoken}`
                 text: `This Link Valid For 5 MINUTES https://login-functionality-tlcc.vercel.app/forgotpassword/${userfind.id}/${setusertoken.verifytoken}`
             }
 
@@ -165,27 +166,6 @@ router.post("/sendpasswordlink", async (req, res) => {
 });
 
 
-// verify user for forgot password time
-router.get("/forgotpassword/:id/:token", async (req, res) => {
-    const { id, token } = req.params;
-
-    try {
-        const validuser = await User.findOne({ _id: id, verifytoken: token });
-
-        const verifyToken = jwt.verify(token, JWT_SECRET);
-
-        console.log(verifyToken)
-
-        if (validuser && verifyToken._id) {
-            res.status(201).json({ status: 201, validuser })
-        } else {
-            res.status(401).json({ status: 401, message: "user not exist" })
-        }
-
-    } catch (error) {
-        res.status(401).json({ status: 401, error })
-    }
-});
 
 
 // change password

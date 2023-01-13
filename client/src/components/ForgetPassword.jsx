@@ -87,25 +87,6 @@ const ForgetPassword = () => {
 
     const [message, setMessage] = useState("");
 
-    const userValid = async () => {
-        const res = await axios.get(`/forgotpassword/${id}/${token}`, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        const data = await res.data;
-
-        if (data.status === 201) {
-            console.log("user valid")
-        } else {
-            console.log("user not valid")
-            // navigate("/")
-            alert("Generate Link again")
-        }
-    }
-
-
     const setval = (e) => {
         setPassword(e.target.value)
     }
@@ -132,13 +113,13 @@ const ForgetPassword = () => {
         } catch (error) {
             console.log("error", error)
             alert("Token Expired, generate link again!")
+            navigate('/')
         }
 
 
     }
 
     useEffect(() => {
-        userValid()
         setTimeout(() => {
             setData(true)
         }, 3000)
