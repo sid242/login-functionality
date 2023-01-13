@@ -16,6 +16,6 @@ app.use("/api/auth", require("./routes/auth"))
 
 
 
-app.listen(4000, () => {
+app.listen(port, () => {
     console.log(`listening at port no ${port}`);
 })

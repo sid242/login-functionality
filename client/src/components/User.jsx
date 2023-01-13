@@ -146,7 +146,7 @@ const User = () => {
                 <Span style={{ fontWeight: "bold" }}>{filterData.length}, Users </Span>
                 <Span>Show 10 Entries</Span>
             </Info>
-            <UserTable userData={userData} currentUsers={currentUsers} indexOfFirstUser={indexOfFirstUser} setRandom={setRandom} random={random} setUserData={setUserData} loading={loading} />
+            <UserTable userData={userData} filterData={filterData} setFilterData={setFilterData} currentUsers={currentUsers} indexOfFirstUser={indexOfFirstUser} setRandom={setRandom} random={random} setUserData={setUserData} loading={loading} />
 
             <Pagination
                 style={{ marginLeft: "20px", display: "flex" }}

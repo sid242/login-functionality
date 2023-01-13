@@ -25,48 +25,92 @@ const Loader = styled.div`
     text-align: center;
 `
 
-const UserTable = ({ userData, currentUsers, setUserData, random, setRandom, indexOfFirstUser, loading }) => {
+const UserTable = ({ userData, currentUsers, setUserData, random, setRandom, indexOfFirstUser, loading, filterData, setFilterData }) => {
     const [asc, setasc] = useState(false);
     const [ascDate, setAscDate] = useState(false);
 
     function acendingOrder() {
+        console.log("age", userData)
+
         if (!asc) {
-            setUserData(userData.sort(function (a, b) {
+            setFilterData(filterData.sort(function (a, b) {
                 return a.age - b.age
             }))
             setRandom(random + 1)
             setasc(true)
         } else {
-            setUserData(userData.reverse())
+            setFilterData(filterData.reverse())
             setRandom(random + 1)
             setasc(false)
         }
     }
     function acendingDate() {
+        console.log("date", ascDate);
         if (!ascDate) {
-            var dateInMili = userData.filter(items => {
+            var dateInMili = filterData.filter(items => {
                 let month = new Date(items.birthDate).getMonth() + 1
-                return items.birthDate = new Date(items.birthDate).getFullYear() + "-" + month + "-" + new Date(items.birthDate).getDate()
+                if (month < 10) {
+                    month = "0" + month
+                }
+                let date;
+                if (new Date(items.birthDate).getDate() < 10) {
+                    date = "0" + new Date(items.birthDate).getDate()
+                } else {
+                    date = new Date(items.birthDate).getDate()
+                }
+                return items.birthDate = new Date(items.birthDate).getFullYear() + "-" + month + "-" + date
             }).sort(function (a, b) {
                 return a.birthDate - b.birthDate
             }).filter(items => {
                 let month1 = new Date(items.birthDate).getMonth() + 1
-                return items.birthDate = new Date(items.birthDate).getFullYear() + "-" + month1 + "-" + new Date(items.birthDate).getDate()
+                if (month1 < 10) {
+                    month1 = "0" + month1
+                }
+                let date1;
+                if (new Date(items.birthDate).getDate() < 10) {
+                    date1 = "0" + new Date(items.birthDate).getDate()
+                } else {
+                    date1 = new Date(items.birthDate).getDate()
+                }
+                return items.birthDate = new Date(items.birthDate).getFullYear() + "-" + month1 + "-" + date1
             })
-            setUserData(dateInMili)
+            // console.log(dateInMili);
+            setFilterData(dateInMili)
             setRandom(random + 1)
             setAscDate(true)
         } else {
-            dateInMili = userData.filter(items => {
+            dateInMili = filterData.filter(items => {
                 let month = new Date(items.birthDate).getMonth() + 1
-                return items.birthDate = new Date(items.birthDate).getFullYear() + "-" + month + "-" + new Date(items.birthDate).getDate()
+                let date;
+                if (month < 10) {
+                    month = "0" + month
+                }
+                if (new Date(items.birthDate).getDate() < 10) {
+                    date = "0" + new Date(items.birthDate).getDate()
+                } else {
+                    date = new Date(items.birthDate).getDate()
+                }
+
+                return items.birthDate = new Date(items.birthDate).getFullYear() + "-" + month + "-" + date
             }).sort(function (a, b) {
                 return a.birthDate - b.birthDate
             }).filter(items => {
                 let month1 = new Date(items.birthDate).getMonth() + 1
-                return items.birthDate = new Date(items.birthDate).getFullYear() + "-" + month1 + "-" + new Date(items.birthDate).getDate()
+                if (month1 < 10) {
+                    month1 = "0" + month1
+                }
+                let date1;
+                if (new Date(items.birthDate).getDate() < 10) {
+                    date1 = "0" + new Date(items.birthDate).getDate()
+                } else {
+                    date1 = new Date(items.birthDate).getDate()
+                }
+                return items.birthDate = new Date(items.birthDate).getFullYear() + "-" + month1 + "-" + date1
             })
-            setUserData(dateInMili.reverse())
+
+            // console.log(dateInMili);
+
+            setFilterData(dateInMili.reverse())
             setRandom(random + 1)
             setAscDate(false)
         }
