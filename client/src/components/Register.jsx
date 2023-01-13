@@ -88,8 +88,7 @@ const Register = () => {
                     data,
                     {
                         headers: {
-                            'Content-Type': 'application/json',
-                            'Access-Control-Allow-Origin': '*',
+                            'Content-Type': 'application/json'
                         },
                     });
                 const json = await response.data;
